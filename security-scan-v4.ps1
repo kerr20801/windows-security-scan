@@ -549,7 +549,7 @@ function analyse() {
       if (newItems.length) {
         newItemsHtml += `<div style="margin-bottom:10px">
           <span style="color:#94a3b8;font-size:.8rem">${def.label}</span>
-          ' + newItems.map(function(x){ return '<span class="new-item-tag">NEW ' + x + '</span>'; }).join(' ') + '
+          ${newItems.map(x => `<span class="new-item-tag">🆕 ${x}</span>`).join(' ')}
         </div>`;
       }
     });
@@ -574,7 +574,7 @@ function analyse() {
         <div class="alert-row ${a.level}">
           <span class="alert-time">${a.timestamp}</span>
           <div class="alert-msg">${icon} ${a.message}</div>
-          ' + (a.detail ? '<div class="alert-detail">' + a.detail + '</div>' : '') + '
+          ${a.detail ? `<div class="alert-detail">→ ${a.detail}</div>` : ''}
         </div>`;
     });
   }
