@@ -452,17 +452,17 @@ function analyse() {
   const statusCls = SCAN.metrics.criticalCount > 0 ? 'status-crit' : SCAN.metrics.warningCount > 0 ? 'status-warn' : 'status-good';
   const statusTxt = SCAN.metrics.criticalCount > 0 ? '🔴 需要立即處理' : SCAN.metrics.warningCount > 0 ? '🟡 有警告項目' : '🟢 狀態良好';
   document.getElementById('meta-line').innerHTML =
-    `主機: <b>${SCAN.hostname}</b> | 使用者: ${SCAN.username} | IP: ${SCAN.ip} | ` +
-    `掃描時間: ${SCAN.timestamp} | 耗時: ${SCAN.metrics.scanSeconds}s | ` +
-    `<span class="${statusCls}">${statusTxt}</span>`;
+    `主機: <b>`${SCAN.hostname}</b> | 使用者: `${SCAN.username} | IP: `${SCAN.ip} | ` +
+    `掃描時間: `${SCAN.timestamp} | 耗時: `${SCAN.metrics.scanSeconds}s | ` +
+    `<span class="`${statusCls}">`${statusTxt}</span>`;
 
   // 歷史資訊
   document.getElementById('history-info').textContent =
     n < 3
-      ? `歷史資料不足（目前 ${n} 筆，需至少 3 筆才能計算基線）—— 本次掃描資料已記錄`
-      : `已累積 ${n} 筆掃描紀錄，基線計算使用最近 ${Math.min(n,20)} 筆`;
+      ? `歷史資料不足（目前 `${n} 筆，需至少 3 筆才能計算基線）—— 本次掃描資料已記錄`
+      : `已累積 `${n} 筆掃描紀錄，基線計算使用最近 `${Math.min(n,20)} 筆`;
 
-  document.getElementById('scan-count-footer').textContent = `已累積 ${n+1} 次掃描`;
+  document.getElementById('scan-count-footer').textContent = `已累積 `${n+1} 次掃描`;
 
   // ── 風險評分 ──
   const riskBarsEl = document.getElementById('risk-bars');
@@ -489,16 +489,16 @@ function analyse() {
       const sparks = sparkData.map(v => {
         const h = Math.max(Math.round((v/maxV)*28), 2);
         const c = v === cur ? '#f59e0b' : '#3b82f6';
-        return `<div class="spark-bar" style="height:${h}px;background:${c}" title="${v}"></div>`;
+        return `<div class="spark-bar" style="height:`${h}px;background:`${c}" title="`${v}"></div>`;
       }).join('');
 
       riskBarsEl.innerHTML += `
         <div style="margin-bottom:14px">
-          <div class="risk-title">${def.label}${badge} — 目前: <b>${cur}</b>，基線均值: ${mean.toFixed(1)}</div>
-          <div class="risk-bar"><div class="risk-fill" style="width:${pct}%;background:${color}"></div></div>
+          <div class="risk-title">`${def.label}`${badge} — 目前: <b>`${cur}</b>，基線均值: `${mean.toFixed(1)}</div>
+          <div class="risk-bar"><div class="risk-fill" style="width:`${pct}%;background:`${color}"></div></div>
           <div style="display:flex;justify-content:space-between;align-items:flex-end">
-            <div class="risk-label"><span>低</span><span>風險 ${pct}%</span><span>高</span></div>
-            <div class="sparkline">${sparks}</div>
+            <div class="risk-label"><span>低</span><span>風險 `${pct}%</span><span>高</span></div>
+            <div class="sparkline">`${sparks}</div>
           </div>
         </div>`;
     });
@@ -508,8 +508,8 @@ function analyse() {
     const avgColor = avg >= 0.67 ? '#ef4444' : avg >= 0.34 ? '#f59e0b' : '#22c55e';
     document.getElementById('ml-section').style.borderColor = avgColor;
     document.getElementById('ml-section').insertAdjacentHTML('afterbegin',
-      `<div style="text-align:right;font-size:.85rem;color:${avgColor};font-weight:600;margin-bottom:12px">
-        整體異常評分：${avgPct}%
+      `<div style="text-align:right;font-size:.85rem;color:`${avgColor};font-weight:600;margin-bottom:12px">
+        整體異常評分：`${avgPct}%
        </div>`);
   } else {
     riskBarsEl.innerHTML = '<div style="color:#64748b;font-size:.85rem">歷史資料累積中，下次掃描後開始顯示趨勢</div>';
@@ -523,15 +523,15 @@ function analyse() {
     if (n >= 1) {
       const prev = history[history.length-1].metrics[def.key] || 0;
       const diff = cur - prev;
-      if (diff > 0)      deltaHtml = `<div class="metric-delta delta-up">▲ ${diff} 較上次</div>`;
-      else if (diff < 0) deltaHtml = `<div class="metric-delta delta-dn">▼ ${Math.abs(diff)} 較上次</div>`;
+      if (diff > 0)      deltaHtml = `<div class="metric-delta delta-up">▲ `${diff} 較上次</div>`;
+      else if (diff < 0) deltaHtml = `<div class="metric-delta delta-dn">▼ `${Math.abs(diff)} 較上次</div>`;
       else               deltaHtml = `<div class="metric-delta delta-eq">持平</div>`;
     }
     metricEl.innerHTML += `
       <div class="metric-item">
-        <div class="metric-name">${def.label}</div>
-        <div class="metric-val">${cur}</div>
-        ${deltaHtml}
+        <div class="metric-name">`${def.label}</div>
+        <div class="metric-val">`${cur}</div>
+        `${deltaHtml}
       </div>`;
   });
 
@@ -545,8 +545,8 @@ function analyse() {
       const newItems = [...curSet].filter(x => !prevSet.has(x));
       if (newItems.length) {
         newItemsHtml += `<div style="margin-bottom:10px">
-          <span style="color:#94a3b8;font-size:.8rem">${def.label}</span>
-          ${newItems.map(x => `<span class="new-item-tag">🆕 ${x}</span>`).join(' ')}
+          <span style="color:#94a3b8;font-size:.8rem">`${def.label}</span>
+          `${newItems.map(x => `<span class="new-item-tag">🆕 `${x}</span>`).join(' ')}
         </div>`;
       }
     });
@@ -568,10 +568,10 @@ function analyse() {
     sorted.forEach(a => {
       const icon = a.level==='CRITICAL' ? '⛔' : a.level==='WARNING' ? '⚠️' : 'ℹ️';
       alertEl.innerHTML += `
-        <div class="alert-row ${a.level}">
-          <span class="alert-time">${a.timestamp}</span>
-          <div class="alert-msg">${icon} ${a.message}</div>
-          ${a.detail ? `<div class="alert-detail">→ ${a.detail}</div>` : ''}
+        <div class="alert-row `${a.level}">
+          <span class="alert-time">`${a.timestamp}</span>
+          <div class="alert-msg">`${icon} `${a.message}</div>
+          `${a.detail ? `<div class="alert-detail">→ `${a.detail}</div>` : ''}
         </div>`;
     });
   }
