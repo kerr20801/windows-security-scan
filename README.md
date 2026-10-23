@@ -26,23 +26,31 @@
 ### 需求
 - Windows 10 / 11
 - PowerShell 5.1 以上
-- **系統管理員** 權限（腳本會自動提權）
+- **系統管理員** 權限（腳本會自動提示提權）
 
-### 執行方式
+### 📥 取得專案（免任何金鑰）
+- **直接下載 ZIP（最推薦）**：點擊 [Download ZIP](https://github.com/kerr20801/windows-security-scan/archive/refs/heads/main.zip) 下載後解壓縮。
+- **Git Clone（免金鑰）**：
+  `ash
+  git clone https://github.com/kerr20801/windows-security-scan.git
+  `
 
-**方法一：右鍵以系統管理員執行**
-```
-右鍵 SecurityScan.ps1 → 以系統管理員身分執行
-```
+### ⚡ 執行方式
+
+**方法一：一鍵執行（最簡單，推薦）**
+`
+直接滑鼠連按兩下「run.bat」
+（彈出 Windows UAC 系統管理員權限提示時點選「是」即可）
+`
 
 **方法二：PowerShell 執行**
-```powershell
-# 以系統管理員開啟 PowerShell，執行：
+`powershell
+# 以系統管理員開啟 PowerShell，切換至目錄後執行：
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
-.\SecurityScan.ps1
-```
+.\security-scan-v4.ps1
+`
 
-掃描完成後，HTML 報告會自動儲存到桌面並開啟。
+掃描完成後，HTML 報告會自動儲存到桌面並自動於瀏覽器開啟。
 
 ---
 
@@ -101,7 +109,10 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 
 ```
 windows-security-scan/
-└── SecurityScan.ps1    # 主掃描腳本
+├── run.bat                 # 一鍵雙擊執行批次檔（推薦）
+├── security-scan-v4.ps1    # 主掃描腳本
+├── SecurityScan.ps1        # 捷徑包裝腳本
+└── README.md
 ```
 
 報告輸出路徑：
