@@ -6,7 +6,7 @@
 ![Platform](https://img.shields.io/badge/Platform-Windows%2010%2F11-0078D6?logo=windows)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
----
+--- 
 
 ## ✨ 功能特色
 
